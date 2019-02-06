@@ -13,7 +13,7 @@ const set = (object, path, value) => {
 
     // Ignore path without '.'
     if (pathArrayLength < 2) {
-        return object
+        return object;
     }
 
     // Drop fist empty property and get an object with last property
@@ -22,9 +22,9 @@ const set = (object, path, value) => {
         if (!currentPropertyValue.hasOwnProperty(nextPropertyName)) {
             currentPropertyValue[nextPropertyName] = {};
         }
-        return currentPropertyValue[nextPropertyName]
+        return currentPropertyValue[nextPropertyName];
     }, object);
 
     propertyValue[pathArray[pathArrayLength - 1]] = value;
-    return object
+    return object;
 };
