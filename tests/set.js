@@ -66,6 +66,13 @@ QUnit.module('Тестируем функцию set', function () {
 			]
 		};
 
+        const object3 = {
+            foo: [ 1, 2, 3 ],
+            bar: [
+                {foobar: '42'}
+            ]
+        };
+
 		const new1 = {
 			foo: [ 42, 2, 3 ],
 			bar: [
@@ -80,8 +87,16 @@ QUnit.module('Тестируем функцию set', function () {
 			]
 		};
 
+        const new3 = {
+            foo: [ 1, 2, 3, 4 ],
+            bar: [
+                {foobar: '42'}
+            ]
+        };
+
 		assert.deepEqual(set(object1, '.foo.0', 42), new1);
 		assert.deepEqual(set(object2, '.bar.0.foobar', 'baz'), new2);
+        assert.deepEqual(set(object3, '.foo.3', 4), new3);
 	});
 
 	QUnit.test('set работает правильно c объектами без свойств', function (assert) {
@@ -95,4 +110,27 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
+
+    QUnit.test('set работает правильно c полученным в качестве параметра массивом', function (assert) {
+        const object = [
+            {foo: 'I am first'},
+            {bar: 'I am second'}
+        ];
+
+        const object1 = [
+            {foo: 'I am first'},
+            {bar: 'I am first too'}
+        ];
+
+        assert.deepEqual(set(object, '.1.bar', 'I am first too'), object1);
+    });
+
+    QUnit.test('set игнорирует путь без символа "." к свойству', function (assert) {
+        const object = {
+            foo: 'bar'
+        };
+
+        assert.deepEqual(set(object, '', 'First'), object);
+        assert.deepEqual(set(object, 'foo', 'New'), object);
+    });
 });
