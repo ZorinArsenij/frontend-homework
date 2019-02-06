@@ -17,7 +17,9 @@ const set = (object, path, value) => {
     }
 
     // Drop fist empty property and get an object with last property
-    const propertyValue = pathArray.slice(1, pathArrayLength - 1).reduce((currentPropertyValue, nextPropertyName) => {
+    const propertyValue = pathArray
+        .slice(1, pathArrayLength - 1)
+        .reduce((currentPropertyValue, nextPropertyName) => {
         // if property doesn't exist in current object, set it to empty object
         if (!currentPropertyValue.hasOwnProperty(nextPropertyName)) {
             currentPropertyValue[nextPropertyName] = {};
