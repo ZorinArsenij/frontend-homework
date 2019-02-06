@@ -4,7 +4,7 @@
  * Change object property value
  * @param {Object} object - object to update property
  * @param {string} path - path to property
- * @param {string} value - new property value
+ * @param {*} value - new property value
  * @returns {Object} - updated object
  */
 const set = (object, path, value) => {
